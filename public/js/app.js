@@ -1,116 +1,116 @@
-angular.module("contactsApp", ['ngRoute'])
+angular.module("patientsApp", ['ngRoute'])
     .config(function($routeProvider) {
         $routeProvider
             .when("/", {
                 templateUrl: "list.html",
                 controller: "ListController",
                 resolve: {
-                    contacts: function(Contacts) {
-                        return Contacts.getContacts();
+                    patients: function(Patients) {
+                        return Patients.getPatients();
                     }
                 }
             })
-            .when("/new/contact", {
-                controller: "NewContactController",
-                templateUrl: "contact-form.html"
+            .when("/new/patient", {
+                controller: "NewPatientController",
+                templateUrl: "patient-form.html"
             })
-            .when("/contact/:contactId", {
-                controller: "EditContactController",
-                templateUrl: "contact.html"
+            .when("/patient/:patientId", {
+                controller: "EditPatientController",
+                templateUrl: "patient.html"
             })
             .otherwise({
                 redirectTo: "/"
             })
     })
-    .service("Contacts", function($http) {
-        this.getContacts = function() {
-            return $http.get("/contacts").
+    .service("Patients", function($http) {
+        this.getPatients = function() {
+            return $http.get("/patients").
                 then(function(response) {
                     return response;
                 }, function(response) {
-                    alert("Error finding contacts.");
+                    alert("Error finding patients.");
                 });
         }
-        this.createContact = function(contact) {
-            return $http.post("/contacts", contact).
+        this.createPatient = function(patient) {
+            return $http.post("/patients", patient).
                 then(function(response) {
                     return response;
                 }, function(response) {
-                    alert("Error creating contact.");
+                    alert("Error creating patient.");
                 });
         }
-        this.getContact = function(contactId) {
-            var url = "/contacts/" + contactId;
+        this.getPatient = function(patientId) {
+            var url = "/patients/" + patientId;
             return $http.get(url).
                 then(function(response) {
                     return response;
                 }, function(response) {
-                    alert("Error finding this contact.");
+                    alert("Error finding this patient.");
                 });
         }
-        this.editContact = function(contact) {
-            var url = "/contacts/" + contact._id;
-            console.log(contact._id);
-            return $http.put(url, contact).
+        this.editPatient = function(patient) {
+            var url = "/patients/" + patient._id;
+            console.log(patient._id);
+            return $http.put(url, patient).
                 then(function(response) {
                     return response;
                 }, function(response) {
-                    alert("Error editing this contact.");
+                    alert("Error editing this patient.");
                     console.log(response);
                 });
         }
-        this.deleteContact = function(contactId) {
-            var url = "/contacts/" + contactId;
+        this.deletePatient = function(patientId) {
+            var url = "/patients/" + patientId;
             return $http.delete(url).
                 then(function(response) {
                     return response;
                 }, function(response) {
-                    alert("Error deleting this contact.");
+                    alert("Error deleting this patient.");
                     console.log(response);
                 });
         }
     })
-    .controller("ListController", function(contacts, $scope) {
-        $scope.contacts = contacts.data;
+    .controller("ListController", function(patients, $scope) {
+        $scope.patients = patients.data;
     })
-    .controller("NewContactController", function($scope, $location, Contacts) {
+    .controller("NewPatientController", function($scope, $location, Patients) {
         $scope.back = function() {
             $location.path("#/");
         }
 
-        $scope.saveContact = function(contact) {
-            Contacts.createContact(contact).then(function(doc) {
-                var contactUrl = "/contact/" + doc.data._id;
-                $location.path(contactUrl);
+        $scope.savePatient = function(patient) {
+            Patients.createPatient(patient).then(function(doc) {
+                var patientUrl = "/patient/" + doc.data._id;
+                $location.path(patientUrl);
             }, function(response) {
                 alert(response);
             });
         }
     })
-    .controller("EditContactController", function($scope, $routeParams, Contacts) {
-        Contacts.getContact($routeParams.contactId).then(function(doc) {
-            $scope.contact = doc.data;
+    .controller("EditPatientController", function($scope, $routeParams, Patients) {
+        Patients.getPatient($routeParams.patientId).then(function(doc) {
+            $scope.patient = doc.data;
         }, function(response) {
             alert(response);
         });
 
         $scope.toggleEdit = function() {
             $scope.editMode = true;
-            $scope.contactFormUrl = "contact-form.html";
+            $scope.patientFormUrl = "patient-form.html";
         }
 
         $scope.back = function() {
             $scope.editMode = false;
-            $scope.contactFormUrl = "";
+            $scope.patientFormUrl = "";
         }
 
-        $scope.saveContact = function(contact) {
-            Contacts.editContact(contact);
+        $scope.savePatient = function(patient) {
+            Patients.editPatient(patient);
             $scope.editMode = false;
-            $scope.contactFormUrl = "";
+            $scope.patientFormUrl = "";
         }
 
-        $scope.deleteContact = function(contactId) {
-            Contacts.deleteContact(contactId);
+        $scope.deletePatient = function(patientId) {
+            Patients.deletePatient(patientId);
         }
     });
