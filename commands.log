@@ -1,0 +1,17 @@
+cd node-js-getting-started
+heroku create papertail
+heroku addons:create papertail
+heroku addons
+heroku open
+heroku addons:create papertail
+heroku run node
+heroku run bash
+heroku config:set TIMES=2
+ heroku config
+git add .
+git commit -m "Congig"
+git push heroku master
+heroku open times
+heroku addons:create heroku-mongodb:hobby-dev
+heroku addons:create heroku-postgresql:hobby-dev
+doskey /history > commands.log
