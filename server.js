@@ -4,7 +4,9 @@ var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
-var CONTACTS_COLLECTION = "patients";
+var PATIENTS_COLLECTION = "patients";
+var TESTS_COLLECTION = "tests";
+var RECORDS_COLLECTION = "records";
 
 var app = express();
 app.use(express.static(__dirname + "/public"));
@@ -23,11 +25,37 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
   // Save database object from the callback for reuse.
   db = database;
   console.log("Database connection ready");
-
+  var samplePatientpost = {
+    "name": "Jill Collins",
+    "age": 26,
+    "gender": "F",
+    "bloodType": "B",
+    "testData": {
+    			"bloodPressure": 39,
+    			"respiratoryRate": 64,
+    			"bloodOxygenlevel": "high",
+    			"heartBeatRate":9
+    			},
+    "records": {
+    			"bloodPressure": 29,
+    			"respiratoryRate": 93,
+    			"bloodOxygenlevel": "fair",
+    			"heartBeatRate":11
+    			}			
+  };
   // Initialize the app.
   var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
-    console.log("App now running on port", port);
+    console.log("App is running at port", port);
+   /* console.log('Server %s listening at %s', server.name)
+    console.log('Resources:')
+    console.log('/patients')
+    console.log('Sample Patient post Data: ')
+    console.log(samplePatientpost)
+    console.log('Sample Patient Get Data: ')
+    console.log('/patients/:id')
+    console.log('Get all Patients : ')
+    console.log('/patients')*/
   });
 });
 
@@ -45,7 +73,7 @@ function handleError(res, reason, message, code) {
  */
 
 app.get("/patients", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+  db.collection(PATIENTS_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get patients.");
     } else {
@@ -62,7 +90,7 @@ app.post("/patients", function(req, res) {
     handleError(res, "Invalid user input", "Must provide a first or last name.", 400);
   }
 
-  db.collection(CONTACTS_COLLECTION).insertOne(newPatient, function(err, doc) {
+  db.collection(PATIENTS_COLLECTION).insertOne(newPatient, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to create new patient.");
     } else {
@@ -78,7 +106,7 @@ app.post("/patients", function(req, res) {
  */
 
 app.get("/patients/:id", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+  db.collection(PATIENTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to get patient");
     } else {
@@ -91,7 +119,7 @@ app.put("/patients/:id", function(req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
 
-  db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
+  db.collection(PATIENTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update patient");
     } else {
@@ -101,7 +129,7 @@ app.put("/patients/:id", function(req, res) {
 });
 
 app.delete("/patients/:id", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+  db.collection(PATIENTS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
     if (err) {
       handleError(res, err.message, "Failed to delete patient");
     } else {

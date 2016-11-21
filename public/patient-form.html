@@ -34,6 +34,18 @@
       <input id="name" class="form-control" type="text" ng-model="patient.doctor"> 
     </p>
     <p>
+      <label>Blood Group</label> 
+      <input id="name" class="form-control" type="text" ng-model="patient.record.bloodGroup"> 
+    </p>
+    <p>
+      <label>Blood Pressure</label> 
+      <input id="name" class="form-control" type="text" ng-model="patient.test.bloodPressure"> 
+    </p>
+    <p>
+      <label>Heart Beat Rate</label> 
+      <input id="name" class="form-control" type="text" ng-model="patient.test.heartBeatRate"> 
+    </p>
+    <p>
       <button style="margin-top:20px" class="btn btn-default" ng-click="savePatient(patient)">Save</button>
       <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Back</button>
     </p>

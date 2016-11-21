@@ -19,6 +19,9 @@
     <p ng-if="patient.phone.work">Phone (w): {{ patient.phone.work }} </p>
     <p ng-if="patient.address"> Address: {{ patient.address }} </p>
     <p ng-if="patient.doctor"> Doctor: {{ patient.doctor }}</a></p>
+    <p ng-if="patient.record.bloodGroup"> Blood Group: {{ patient.record.bloodGroup }}</a></p>
+    <p ng-if="patient.test.bloodPressure"> Blood Pressure: {{ patient.test.bloodPressure }}</a></p>
+    <p ng-if="patient.test.heartBeatRate"> HeartBeat Rate: {{ patient.test.heartBeatRate }}</a></p>
     <p>
       <button style="margin-top:20px" class="btn btn-default" ng-click="toggleEdit()">Edit</button>
       <a style="margin-top:20px" class="btn btn-default" href="#/">Back</a>
