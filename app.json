@@ -1,8 +1,7 @@
 {
-  "name": "MEAN Contact List Example",
-  "description": "A MEAN app that allows users to manage a contact list.",
+  "name": "eHealthCare",
+  "description": "An app to manage the patients' records.",
   "repository": "https://git.heroku.com/phoenixhealthcare.git",
-  "logo": "https://mlab.com/company/brand/resources/mLab-logo-onlight.png",
-  "keywords": ["node", "express", "angular", "MEAN", "mongodb", "REST", "API"],
+  "keywords": ["node", "express", "angular", "eHealthCare", "mongodb", "REST", "API"],
   "addons": ["mongolab"]
 }
