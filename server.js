@@ -14,6 +14,10 @@ app.use(bodyParser.json());
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
 
+//const conString = 'postgres://Jaismeen:admin@process.env.DATABASE_URL' // make sure to match your own database's credentials
+
+//DATABASE_URL='postgres://Jaismeen:admin@localhost:5000'
+
 // Connect to the database before starting the application server. 
 //mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
 mongodb.connect(process.env.DATABASE_URL, function (err, database) {
