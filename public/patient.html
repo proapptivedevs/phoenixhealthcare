@@ -1,16 +1,8 @@
 <div class = "row">
-  <div class="col-md-6">
-    <h2>
-      {{ patient.firstName }} {{ patient.lastName }}
-    </h2>
+  <div class="col-md-10">
+    <h2>{{ patient.firstName }} {{ patient.lastName }}</h2>
   </div>
-  <div class="col-md-3">
-  </div>
-  <div class="col-md-2">
-    <a href="#/"><button style="margin-top:20px" class="btn btn-default" ng-click="deletePatient(patient._id)">Delete</button></a>
-  </div>
-  <div class="col-md-1">
-  </div>
+  <div class="col-md-2"><a href="#/"><button style="margin-top:20px" class="btn btn-default" ng-click="deletePatient(patient._id)">Delete Patient Record</button></a></div>
 </div>
 <div ng-hide="editMode" class="container">
   <div>
@@ -18,6 +10,7 @@
     <p ng-if="patient.phone.mobile">Phone (m): {{ patient.phone.mobile }} </p>
     <p ng-if="patient.phone.work">Phone (w): {{ patient.phone.work }} </p>
     <p ng-if="patient.address"> Address: {{ patient.address }} </p>
+    <p ng-if="patient.department"> Department: {{ patient.department }} </p>
     <p ng-if="patient.doctor"> Doctor: {{ patient.doctor }}</a></p>
     <p ng-if="patient.record.bloodGroup"> Blood Group: {{ patient.record.bloodGroup }}</a></p>
     <p ng-if="patient.test.bloodPressure"> Blood Pressure: {{ patient.test.bloodPressure }}</a></p>

@@ -1,0 +1,13 @@
+cd herokunode\phoenixhealthcare
+heroku open
+git add .
+git commit -m "Database"
+git push heroku master
+heroku open
+mongoexport -h ds149577.mlab.com:49577 -d heroku_z9rh98vk -c patients -u admin -p admin -o patients.json
+git add .
+git commit -m "Database"
+git push -u origin master
+pm2 server.js
+pm2 start server.js
+doskey /history > commands.log
