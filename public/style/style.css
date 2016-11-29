@@ -1,8 +1,131 @@
+*
+{
+	box-sizing:border-box
+}
 
-      body {
-        min-height: 2000px;
-        padding-top: 70px;
-      }
-      li {
-        padding-right:10px
-      }
+body 
+{
+  min-height: 2000px;
+  padding-top: 70px;
+  font-family:"Montserrat", sans-serif;
+  background-color: #fff;
+}
+
+li 
+{
+    padding-right:10px
+}
+
+.container
+{
+  width:90%;	
+}
+
+a
+{
+	text-decoration:none;
+}
+.wrapper{
+	max-width:100%;
+	margin:0 auto;
+}
+
+
+
+
+      /* ------------------- Video Banner ---------------------------------*/
+
+.no-video .video-container video,
+.touch .video-container video {
+    display: none;
+}
+.no-video .video-container .poster,
+.touch .video-container .poster {
+    display: block !important;
+}
+.video-container {
+    position: relative;
+	height: 450px;
+    width: 100%;
+    overflow: hidden;
+	}
+
+.video-container img {
+    width: 100%;
+    bottom: 0;
+  	height: 450px;
+    object-fit:fill;
+}
+
+.video-container .filter {
+    z-index: 1;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+.video-container video {
+    
+    z-index: 1;
+}
+.video-container video.fillWidth {
+    width: 100%;
+}
+#banner #logo{
+	float:left;
+    margin-left:30px;
+	margin:0 0 0 10;
+	height:50px;
+	width:50px;
+}
+
+.text {
+  color: #ffffff;
+  font-style:bold;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 25%;
+  right:3%;
+  width: 100%;
+  text-align: center;
+  text-shadow: 1.2px 1.2px 0px #000000; 
+}
+.nav > li > a:hover {
+      color: #FF5252;
+      background-color: red;
+ }
+
+.text h1{
+   vertical-align:middle;
+   font-size:250%;
+}
+
+.text p{
+   font-size:2rem;
+}
+.text a{
+	color:#fff;
+	text-decoration:none
+}	
+
+@media (max-device-width: 786px)
+{
+	.container
+    {
+        width:100%;	
+    }
+    .text
+	{
+		bottom:-20%; 
+	}
+
+	.text p
+	{
+        visibility:hidden;
+    }
+    
+    .video-container
+	{
+		height:auto;
+	}
+	
+}

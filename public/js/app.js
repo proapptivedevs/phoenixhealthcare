@@ -14,6 +14,22 @@ angular.module("patientsApp", ['ngRoute'])
                 controller: "NewPatientController",
                 templateUrl: "patient-form.html"
             })
+             .when("/tests", {
+                controller: "TestListController",
+                templateUrl: "tests.html"
+            })
+             .when("/new/tests", {
+                controller: "NewTestController",
+                templateUrl: "add-test.html"
+            })
+             .when("/records", {
+                controller: "RecordListController",
+                templateUrl: "records.html"
+            })
+            .when("/update/record", {
+                controller: "UpdateRecordController",
+                templateUrl: "update-record.html"
+            })
             .when("/patient/:patientId", {
                 controller: "EditPatientController",
                 templateUrl: "patient.html"

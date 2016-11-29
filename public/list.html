@@ -1,23 +1,18 @@
 <div class = "row">
-  <div class="col-md-10">
+  <div class="col-md-12">
     <center><h2>Patients List</h2></center>
   </div>
-  <div class="col-md-2">
-    <a style="margin-top:20px" class="btn btn-default" href="#/new/patient">Add Patient</a>
-  </div>
-
 </div>
-<div class="container">
-  <table class="table table-hover">
+<div class="col-md-12 container">
+  <center><table class="table table-hover">
     <tbody>
-      <tr><th>Patient Name</th><th>Department</th><th>Doctor Name</th></tr>
+      <tr><th>Patient Name</th><th>Department</th><th>Doctor Name</th><th>Contact</th></tr>
       <tr ng-repeat="patient in patients | orderBy:'lastName'" style="cursor:pointer">
-        <td>
-            <a ng-href="#/patient/{{patient._id}}">{{ patient.firstName }} {{ patient.lastName }}</a>
-        </td>
+        <td><a ng-href="#/patient/{{patient._id}}">{{ patient.firstName }} {{ patient.lastName }}</a></td>
         <td>{{ patient.department }}</td>
         <td>{{ patient.doctor }}</td>
+        <td>{{patient.phone.mobile}}</td>
       </tr>
     </tbody>
-  </table>
+  </table></center>
 </div>
