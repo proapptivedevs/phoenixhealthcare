@@ -6,14 +6,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <!-- Angular lib -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Angular lib -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="/style/style.css">
     <!-- Create some padding for body -->
     <script src="/js/app.js"></script>
@@ -28,18 +28,17 @@
   <body>
     <section id="banner">
 			<div class="wrapper">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
           <div class="container">
             <div class="navbar-header page-scroll">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-					      <span class="sr-only">Toggle navigation</span>
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menubar">
 					      <span class="icon-bar"></span>
 					      <span class="icon-bar"></span>
 					      <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand page-scroll" href="#/"><img id="logo" src="images/ehealthcare_logo.png" alt="eHealthCare_logo"></a>
             </div>					
-            <div class="collapse navbar-collapse navbar-ex1-collapse" style="float:right;">
+            <div class="collapse navbar-collapse" id="menubar" style="float:right;">
               <ul class="nav navbar-nav">	
                 <li><a class="page-scroll active" style="color:red;" href="#/">Home</a></li>
                 <li><a class="page-scroll" href="#/new/patient">Add Patients</a></li>

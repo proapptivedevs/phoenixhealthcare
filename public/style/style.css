@@ -115,7 +115,7 @@ a
     }
     .text
 	{
-		bottom:-20%; 
+		bottom:10%; 
 	}
 
 	.text p
@@ -125,7 +125,7 @@ a
     
     .video-container
 	{
-		height:auto;
+		height:300px;
 	}
 	
 }
