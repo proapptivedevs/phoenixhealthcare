@@ -2,14 +2,15 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
 
+var ObjectID = mongodb.ObjectID;
 var PATIENTS = "patients";
 var TESTS = "tests";
 var RECORDS = "records";
 var USERS = "users";
 
 var app = express();
+
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
@@ -79,6 +80,10 @@ app.post("/patients", function(req, res) {
     }
   });
 });
+
+
+
+
 
 /*  "/patients/:id"
  *    GET: find patient by id
