@@ -14,12 +14,9 @@ var app = express();
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-// Create a database variable outside of the database connection callback to reuse the connection pool in your app.
-//const IP = process.env.MONGODB_IP_ADDRESS | '127.0.0.1',
-//PORT = process.env.MONGODB_PORT | 27017;
+// DB and Server Connectivity
 
 var db;
-
 var URI = process.env.MONGODB_URI;
 if (!URI)
   URI = 'mongodb://127.0.0.1:27017/eHealthCare';
@@ -123,3 +120,45 @@ app.delete("/patients/:id", function(req, res) {
     }
   });
 });
+
+
+// records
+app.get('/patient/:id/record', function (req, res, next) {
+   patientRecordSave.find({ patient_id: req.params.id }, function (error, patientRecords) {
+   res.send(patientRecords)
+  });
+});
+
+
+app.post('/patient/:id/record', function (req, res, next) {
+
+  if (req.params.date === undefined ) {
+    return next(new restify.InvalidArgumentError('date must be supplied'))
+  }
+  if (req.params.type === undefined ) {
+    return next(new restify.InvalidArgumentError('type must be supplied'))
+  }
+  if (req.params.value1 === undefined ) {
+    return next(new restify.InvalidArgumentError('value1 must be supplied'))
+  }
+  if (req.params.nurse === undefined ) {
+    return next(new restify.InvalidArgumentError('nurse must be supplied'))
+  }
+  
+  
+  var newPatientRecord = {
+		patient_id: req.params.id, 
+		date: req.params.date, 
+		type: req.params.type,
+		value1: req.params.value1,
+		value2: req.params.value2,
+		nurse: req.params.nurse
+	}
+
+  patientRecordSave.create( newPatientRecord, function (error, patient) {
+    if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+    res.send(201, newPatientRecord)
+  });
+});
+
+

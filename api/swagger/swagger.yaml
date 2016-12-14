@@ -1,0 +1,245 @@
+swagger: '2.0'
+info:
+  description: This API is to connect an Health Care records website records to the mongo DB
+  version: 1.0.0
+  title: eHeathCare DB API
+  # put the contact info for your development or API team
+  contact:
+    email: jaismeen.sandhu@gmail.com
+
+  license:
+    name: eHealthCare
+    url: https://phoenixhealthcare.herokuapp.com
+
+# all paths will be relative to the basePath specified
+# basePath: /v1
+
+# tags are used for organizing operations
+schemes:
+ - http
+
+
+paths:
+  /patients:
+    get:
+      tags:
+      - public operations
+      summary: searches patients
+      operationId: searchPatients
+      description: |
+        By passing in the appropriate options, you can search the patients registered with the hospital
+      produces:
+      - application/json
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Patient'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - admin operations
+      summary: adds a Patient
+      operationId: addPatient
+      description: Adds a patient to the database
+      # require the security authorization for this operation
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: patient
+        description: Patient to add
+        schema:
+          $ref: '#/definitions/Patient'
+      responses:
+        201:
+          description: Patient ID created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: patient already exists
+          
+    put:
+      tags:
+      - admin operations
+      summary: updates a Patient info
+      operationId: updatePatient
+      description: update a patient info to the database
+      # require the security authorization for this operation
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: patient
+        description: Patient to update
+        schema:
+          $ref: '#/definitions/Patient'
+      responses:
+        201:
+          description: patient info updated
+        400:
+          description: invalid input, object invalid
+        409:
+          description: patient does not exist
+        
+  /patient/tests:
+    get:
+      tags:
+      - public operations
+      summary: searches tests
+      operationId: searchTests
+      description: |
+        By passing in the appropriate options, you can search the tests related to particular patient
+      produces:
+      - application/json
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Test'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - admin operations
+      summary: adds a test
+      operationId: addTest
+      description: Adds a test for a particular patient to the database
+      # require the security authorization for this operation
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        201:
+          description: Test created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: test already exists
+          
+    put:
+      tags:
+      - admin operations
+      summary: update test info
+      operationId: updateTest
+      description: update a test info to the database
+      # require the security authorization for this operation
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: patient
+        description: Patient to update
+        schema:
+          $ref: '#/definitions/Test'
+      responses:
+        201:
+          description: test info updated
+        400:
+          description: invalid input, object invalid
+        409:
+          description: test does not exist
+          
+definitions:
+  Patient:
+    type: object
+    required:
+    - id
+    - firstName
+    - lastName
+    - phone
+    - address
+    - record
+    - test
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      firstName:
+        type: string
+        example: John
+      lastName:
+        type: string
+        example: Kyle
+      email:
+        type: string
+        example: john@ehc.com
+      phone:
+        $ref: '#/definitions/Phone'
+      address:
+        type: string
+        example: 16 Kollar Dr,M1G1E2
+      bloodGroup:
+        type: string
+        example: A+
+      test:
+        $ref: '#/definitions/Tests'
+      record:
+        $ref: '#/definitions/Records'
+
+  Test:
+    type: object
+    required:
+    - patientID
+    - testName
+    - testDate
+    - testResult
+    - address
+    properties:
+      patientID:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      testName:
+        type: string
+        example: John Kyle
+      testDate:
+        type: string
+        example: 10/22/2016
+      address:
+        type: string
+        example: 16 Kollar Dr,M1G1E2
+      testResult:
+        type: string
+        example: positive
+  Phone:
+    properties:
+      mobile:
+        type: string
+        format: int32
+        example: 9876543210
+      work:
+        type: string
+        example: 408-867-5309
+  Tests:
+    properties:
+      bloodPressure:
+        type: string
+        example: 98
+      heartBeatRate:
+        type: string
+        example: 72
+  Records:
+    properties:
+      bloodGroup:
+        type: string
+        example: A+
+ #host: localhost:5000
+ #basePath:
+# Added by API Auto Mocking Plugin
+# host: phoenixhealthcare.herokuapp.com
+# Added by API Auto Mocking Plugin
+host: phoenixhealthcare.herokuapp.com
