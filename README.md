@@ -3,7 +3,7 @@
 
 Hosted on Heroku -  https://phoenixhealthcare.herokuapp.com
 
-Used NodeJS, Angular JS, Bootstrap and HTML
+Used NodeJS, Angular JS,MongoDB, Bootstrap and HTML
 
 This app is having functionalities such as
 
